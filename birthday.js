@@ -4,6 +4,8 @@ const startButton = document.querySelector('#start-birthday');
 const screens = [...document.querySelectorAll('.birthday-screen')];
 const laugh = document.querySelector('#laugh-audio');
 const song = document.querySelector('#birthday-song');
+const openingMusic = document.querySelector('#birthday-opening-music');
+const congratsBurst = document.querySelector('#congrats-burst');
 const puzzleData = [
   { answer: '7 October', choices: ['7 October','8 August','14 February','Jabez forgot'], prompt: 'When is your birthday?' },
   { answer: 'Ice cream shop', choices: ['Ice cream shop','Hardware shop','A secret government office','Jabez\'s imaginary restaurant'], prompt: 'Where did Jabez last take you for ice cream?' },
@@ -39,7 +41,12 @@ function renderPuzzle(){
 function begin(){
   birthday.classList.add('started');
   showScreen('birthday-welcome');
-  sparkleBurst(45);
+  sparkleBurst(95);
+  congratsBurst.classList.add('show');
+  setTimeout(()=>congratsBurst.classList.remove('show'),2400);
+  openingMusic.currentTime=0;
+  openingMusic.volume=0.34;
+  openingMusic.play().catch(()=>{});
   startButton.disabled=true;
   setTimeout(()=>showScreen('birthday-puzzle'),2500);
   renderPuzzle();
@@ -88,7 +95,12 @@ function setupGame(){
 }
 
 document.querySelector('#open-gift').addEventListener('click',()=>{
-  sparkleBurst(65);
+  sparkleBurst(110);
+  openingMusic.pause();
+  openingMusic.currentTime=0;
+  song.currentTime=0;
+  song.volume=0.9;
+  song.play().catch(()=>{});
   document.querySelector('#gift-box').classList.add('opened');
   setTimeout(()=>{
     shop.classList.add('revealed');
@@ -105,15 +117,14 @@ function startPrankTimer(){
     laugh.play().catch(()=>{});
     setTimeout(()=>document.querySelector('#prank-message').classList.add('show'),1900);
     setTimeout(()=>{
-      document.querySelector('#prank-message').classList.add('final-song');
-      song.currentTime=0; song.play().catch(()=>{});
     },10500);
-    setTimeout(()=>{ shop.classList.remove('prank'); document.querySelector('#prank-message').classList.remove('show','final-song'); song.pause(); startDreamBook(); },22000);
+    setTimeout(()=>{ shop.classList.remove('prank'); document.querySelector('#prank-message').classList.remove('show','final-song'); song.pause(); song.currentTime=0; startDreamBook(); },22000);
   },35000);
 }
 
 // Make the final birthday tune available after the user's first tap.
-window.addEventListener('beforeunload',()=>clearTimeout(prankTimer));
+song.addEventListener('ended',()=>{ song.pause(); song.currentTime=0; });
+window.addEventListener('beforeunload',()=>{ clearTimeout(prankTimer); openingMusic.pause(); song.pause(); });
 
 
 // --- Imani's little dream book ---

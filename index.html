@@ -53,6 +53,11 @@
       </div>
     </section>
   </div>
+  <div id="congrats-burst" class="congrats-burst" aria-hidden="true">
+    <div class="congrats-rays"></div>
+    <div class="congrats-card"><span>CONGRATULATIONS!</span><strong>It is your birthday, Imani!</strong></div>
+  </div>
+  <audio id="birthday-opening-music" preload="auto" loop><source src="assets/birthday-opening-music.wav" type="audio/wav"></audio>
   <audio id="laugh-audio" preload="auto"><source src="assets/imani-laugh.mp3" type="audio/mpeg"></audio>
   <audio id="birthday-song" preload="auto"><source src="assets/happy-birthday-imani.wav" type="audio/wav"></audio>
   <div id="prank-message" class="prank-message" aria-live="polite">
@@ -112,12 +117,11 @@
         <p class="hero-text">Handpicked beadwork, colourful accessories and pieces made to be noticed.</p>
         <a class="cta" href="#collection">Explore the collection <span>↗</span></a>
       </div>
-      <div class="bead-orbit" aria-label="Decorative bead display">
-        <div class="orbit orbit-one"></div>
-        <div class="orbit orbit-two"></div>
-        <div class="bead bead-a"></div><div class="bead bead-b"></div>
-        <div class="bead bead-c"></div><div class="bead bead-d"></div>
-        <div class="bead bead-e"></div><div class="bead bead-f"></div>
+      <div class="hero-gallery" aria-label="Shanga beadwork gallery">
+        <div class="hero-slide active"><img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Traditional_waist_beads_and_accessories.jpg" alt="Colorful Kenyan waist beads and accessories"></div>
+        <div class="hero-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/6/67/Kenyan_Necklace_Beads.jpg" alt="Kenyan beaded necklaces"></div>
+        <div class="hero-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/African_bead_work.jpg" alt="Kenyan beadwork bracelets and necklaces"></div>
+        <div class="hero-gallery-caption"><span id="hero-caption">Waist beads &amp; accessories</span><div class="hero-dots" aria-label="Gallery controls"><button class="hero-dot active" type="button" aria-label="Show image 1"></button><button class="hero-dot" type="button" aria-label="Show image 2"></button><button class="hero-dot" type="button" aria-label="Show image 3"></button></div></div>
       </div>
     </section>
 
@@ -134,6 +138,7 @@
     <strong>IMANI BEAD WORKS</strong>
     <span>Bomet, Kenya</span>
     <a href="https://wa.me/254786800131">WhatsApp · +254 786 800131</a>
+    <small class="image-credit">Reference beadwork imagery: Wikimedia Commons (CC0 / CC BY-SA).</small>
   </footer>
   <script src="app.js"></script>
   <script src="birthday.js"></script>
