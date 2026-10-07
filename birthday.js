@@ -1,3 +1,5 @@
+// Browser storage can be blocked (in-app browsers, private mode). Never let that break the page.
+var safeStore={get(k){try{return window.localStorage.getItem(k);}catch(e){return null;}},set(k,v){try{window.localStorage.setItem(k,v);}catch(e){}}};
 const birthday = document.querySelector('#birthday-experience');
 const shop = document.querySelector('#main-shop');
 const startButton = document.querySelector('#start-birthday');
@@ -149,7 +151,8 @@ const dreamQuestions = [
   { prompt:'What is your biggest dream for your future?', hint:'This one is yours. Take your time.', type:'text', placeholder:'One day, I hope...' }
 ];
 let dreamIndex=0;
-let dreamAnswers=JSON.parse(localStorage.getItem('imaniDreamAnswers')||'{}');
+let dreamAnswers={};
+try{ dreamAnswers=JSON.parse(safeStore.get('imaniDreamAnswers')||'{}')||{}; }catch(e){ dreamAnswers={}; }
 
 let princessVoice=null;
 function choosePrincessVoice(){
@@ -172,7 +175,7 @@ function speakPrincess(text){
 }
 function saveDreamAnswer(value){
   dreamAnswers[dreamIndex]=value;
-  localStorage.setItem('imaniDreamAnswers',JSON.stringify(dreamAnswers));
+  safeStore.set('imaniDreamAnswers',JSON.stringify(dreamAnswers));
 }
 function renderDreamQuestion(){
   const q=dreamQuestions[dreamIndex];
@@ -211,7 +214,7 @@ function renderDreamQuestion(){
     if(input.value.trim())dreamNext.disabled=false;
     if(!window.matchMedia('(pointer:coarse)').matches) setTimeout(()=>input.focus(),250);
   }
-  setTimeout(()=>speakPrincess(q.prompt),350);
+  setTimeout(()=>{ try{ speakPrincess(q.prompt); }catch(e){} },350);
 }
 function startDreamBook(){
   dreamExperience.classList.add('active');
@@ -222,7 +225,7 @@ function startDreamBook(){
 }
 dreamNext.addEventListener('click',()=>{
   if(dreamIndex<dreamQuestions.length-1){dreamIndex++;renderDreamQuestion();}
-  else {dreamExperience.classList.add('finished');dreamFinish.classList.add('show');speakPrincess('Thank you, Imani. I wanted to know what you dream about.');}
+  else {dreamExperience.classList.add('finished');dreamFinish.classList.add('show');try{ speakPrincess('Thank you, Imani. I wanted to know what you dream about.'); }catch(e){} }
 });
 function playFinalSong(){
   if(!akiSioni) return;

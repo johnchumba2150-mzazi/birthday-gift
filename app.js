@@ -1,10 +1,13 @@
+// Browser storage can be blocked (in-app browsers, private mode). Never let that break the page.
+var safeStore={get(k){try{return window.localStorage.getItem(k);}catch(e){return null;}},set(k,v){try{window.localStorage.setItem(k,v);}catch(e){}}};
 const defaults=[
  {id:1,name:"Kenyan Bead Bracelet",category:"Bracelets",price:800,tag:"Colour / Everyday"},
  {id:2,name:"Shanga Waist Beads",category:"Waist Beads",price:1200,tag:"Colour / Statement"},
  {id:3,name:"Beaded Necklace",category:"Necklaces",price:1500,tag:"Hand-finished / Bold"},
  {id:4,name:"Beaded Earrings",category:"Earrings",price:600,tag:"Light / Colourful"}
 ];
-const productsData=JSON.parse(localStorage.getItem("imaniProducts")||"null")||defaults;
+let productsData=defaults;
+try{ productsData=JSON.parse(safeStore.get("imaniProducts")||"null")||defaults; }catch(e){ productsData=defaults; }
 const colors=[['#d96b3b','#f1c75b','#244b45'],['#7c3f70','#f2b35e','#315c52'],['#203b70','#d95b45','#e4c95b'],['#b54b5d','#e4c95b','#356b63']];
 const imagePool=[
  'https://upload.wikimedia.org/wikipedia/commons/d/de/Traditional_waist_beads_and_accessories.jpg',
