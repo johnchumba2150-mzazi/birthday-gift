@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imani Bead Works</title>
+  <meta name="description" content="Imani Bead Works — Your home for everything shangas. Bomet, Kenya.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="birthday.css">
+</head>
+<body>
+  <div id="birthday-experience" aria-label="Imani birthday experience">
+    <div id="confetti"></div>
+    <section id="birthday-start" class="birthday-screen active">
+      <div class="birthday-inner">
+        <p class="birthday-kicker">A very serious announcement</p>
+        <h1 class="birthday-title">Happy Birthday,<br><em>Imani.</em></h1>
+        <p class="birthday-sub">There is a small gift waiting for you. Unfortunately, there are a few stupid things you have to do first.</p>
+        <button id="start-birthday" class="birthday-btn">OPEN YOUR GIFT →</button>
+      </div>
+    </section>
+
+    <section id="birthday-welcome" class="birthday-screen">
+      <div class="birthday-inner"><p class="birthday-kicker">Welcome, birthday girl</p><h2 class="birthday-title">Okay.<br><em>Let's begin.</em></h2></div>
+    </section>
+
+    <section id="birthday-puzzle" class="birthday-screen">
+      <div class="birthday-inner">
+        <p class="birthday-kicker">Security clearance</p>
+        <h2 id="puzzle-prompt" class="puzzle-prompt"></h2>
+        <div id="puzzle-choices" class="choices"></div>
+        <div id="puzzle-note" class="puzzle-note" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="birthday-game" class="birthday-screen">
+      <div class="birthday-inner">
+        <p class="birthday-kicker">One last thing</p>
+        <h2 class="puzzle-prompt">Catch 7 beads.</h2>
+        <p class="birthday-sub">They are not running away. They are just being unnecessarily difficult.</p>
+        <div class="game-wrap"><div id="bead-score" class="score">0 / 7</div><div id="bead-field"></div></div>
+      </div>
+    </section>
+
+    <section id="birthday-gift" class="birthday-screen">
+      <div class="birthday-inner">
+        <p class="birthday-kicker">You actually did it</p>
+        <h2 class="puzzle-prompt">Receive your gift, dear Imani.</h2>
+        <div id="gift-box" class="gift" aria-label="Gift box">
+          <div class="gift-base"></div><div class="gift-lid"></div><div class="gift-ribbon-v"></div><div class="gift-ribbon-h"></div>
+        </div>
+        <button id="open-gift" class="gift-btn">OPEN IT</button>
+      </div>
+    </section>
+  </div>
+  <audio id="laugh-audio" preload="auto"><source src="assets/imani-laugh.mp3" type="audio/mpeg"></audio>
+  <audio id="birthday-song" preload="auto"><source src="assets/happy-birthday-imani.wav" type="audio/wav"></audio>
+  <div id="prank-message" class="prank-message" aria-live="polite">
+    <div class="prank-emoji">😂</div>
+    <div class="prank-text">
+      <p>Happy birthday.</p>
+      <p>HOLY SHIT.</p>
+      <p>You fought me by surprise.</p>
+      <p>I hope you enjoyed it.</p>
+      <p>That's all I can afford for now.</p>
+      <p>Hope next year will be better.</p>
+      <p>May you have many, many children.</p>
+      <p>May your dreams come true.</p>
+      <p>And may you have a lot of cash too.</p>
+      <p>Have a lovely year, Imani.</p>
+    </div>
+  </div>
+
+  <section id="dream-experience" class="dream-experience" aria-label="Imani's dream questions">
+    <div class="dream-room-glow"></div>
+    <div class="dream-princess" aria-hidden="true"><div class="princess-bubble">Hmm...</div><div class="princess-figure"><div class="princess-crown">♕</div><div class="princess-head"><span class="eye left"></span><span class="eye right"></span><span class="smile"></span></div><div class="princess-hair"></div><div class="princess-body"></div><div class="princess-arm left-arm"></div><div class="princess-arm right-arm"></div></div><span class="princess-spark s1">✦</span><span class="princess-spark s2">✧</span></div>
+    <div class="dream-card">
+      <div class="dream-topline"><span>IMANI'S LITTLE DREAM BOOK</span><span id="dream-progress">1 / 6</span></div>
+      <div class="dream-question-wrap">
+        <div class="dream-question-label">A little question for you...</div>
+        <h2 id="dream-question"></h2>
+        <p id="dream-hint" class="dream-hint"></p>
+      </div>
+      <div id="dream-answer" class="dream-answer"></div>
+      <div class="dream-actions">
+        <button id="dream-next" class="dream-next" disabled>Next →</button>
+      </div>
+    </div>
+    <div id="dream-finish" class="dream-finish">
+      <div class="dream-finish-princess">👸</div>
+      <h2>Thank you, Imani.</h2>
+      <p>I wanted to know what you dream about.</p>
+      <p class="dream-keepsake">Your answers are your little dream book.</p>
+      <button id="dream-done" class="dream-next">Back to Imani Bead Works →</button>
+    </div>
+  </section>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span>IMANI</span><small>BEAD WORKS</small></a>
+    <nav>
+      <a href="index.html">Shop</a>
+      <a href="about.html">Our Story</a>
+      <a href="contact.html">Contact</a>
+      <a class="admin-link" href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main id="main-shop">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">BOMET · KENYA</p>
+        <h1>Your home for <em>everything shangas.</em></h1>
+        <p class="hero-text">Handpicked beadwork, colourful accessories and pieces made to be noticed.</p>
+        <a class="cta" href="#collection">Explore the collection <span>↗</span></a>
+      </div>
+      <div class="bead-orbit" aria-label="Decorative bead display">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="bead bead-a"></div><div class="bead bead-b"></div>
+        <div class="bead bead-c"></div><div class="bead bead-d"></div>
+        <div class="bead bead-e"></div><div class="bead bead-f"></div>
+      </div>
+    </section>
+
+    <section id="collection" class="collection">
+      <div class="section-head">
+        <div><p class="eyebrow">THE COLLECTION</p><h2>Made to move with you.</h2></div>
+        <p>Browse a starting selection. Prices can later be managed from the admin dashboard.</p>
+      </div>
+      <div id="products" class="products"></div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>IMANI BEAD WORKS</strong>
+    <span>Bomet, Kenya</span>
+    <a href="https://wa.me/254786800131">WhatsApp · +254 786 800131</a>
+  </footer>
+  <script src="app.js"></script>
+  <script src="birthday.js"></script>
+</body>
+</html>
