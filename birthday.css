@@ -127,3 +127,54 @@ img, video { max-width: 100%; height: auto; }
     padding: 12px 14px;
   }
 }
+
+
+/* ===== Mobile reflow layer (phones/tablets only; desktop rules above untouched) ===== */
+
+/* Root cause of the "everything spreads sideways" bug: the hidden congrats rays keep their
+   final scale(5.2) frame and widen the whole page. Clip them and lock horizontal overflow. */
+html, body { max-width: 100%; overflow-x: hidden; }
+.congrats-burst { position: fixed; overflow: hidden; }
+
+/* Finish screen replaces the question card instead of stacking under it */
+.dream-experience.finished .dream-card { display: none; }
+
+/* Colour swatches always sit in a wrapped row, never stretched by the answer grid */
+.dream-answer.is-colors { display: flex; flex-wrap: wrap; justify-content: center; }
+.dream-answer.is-colors .dream-color { width: 48px; flex: 0 0 48px; }
+
+@media (max-width: 700px) {
+  /* Intro screens: scroll instead of clipping on short phones */
+  .birthday-screen.active { display: flex; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .birthday-inner { margin: auto; min-width: 0; }
+  .birthday-title, .puzzle-prompt, .birthday-sub { overflow-wrap: anywhere; }
+  .game-wrap { height: min(46dvh, 420px); }
+
+  /* Prank screen: text and emoji stack and can scroll */
+  .prank-message { display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 10px; overflow-y: auto; padding: 24px 18px; }
+  .prank-emoji { font-size: clamp(70px, 22vw, 110px); line-height: 1; flex: none; }
+  .prank-text { position: static; width: 100%; font-size: 16px; line-height: 1.55; }
+
+  /* Dream Book: one scrollable column, nothing off-screen, Next always reachable */
+  .dream-experience { padding: 12px; overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .dream-experience.active { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+  .dream-card { width: 100%; min-height: 0; height: auto; max-height: none; overflow: visible;
+    margin: auto 0; padding: 52px 16px 18px; justify-content: flex-start; flex: none; }
+  .dream-topline { left: 16px; right: 16px; }
+  .dream-question-wrap { margin: 14px auto 16px; }
+  .dream-answer { min-height: 0; }
+  .dream-actions { text-align: center; margin-top: 16px; }
+  .dream-next { width: 100%; min-height: 48px; }
+  .dream-finish { width: 100%; margin: auto 0; padding: 36px 20px; flex: none; }
+  .dream-finish h2 { font-size: 34px; }
+
+  /* Princess becomes a small figure above the card instead of covering the question */
+  .dream-princess, .dream-princess.ask { position: relative; left: auto; right: auto; top: auto;
+    transform: none !important; animation: none; width: 115px; height: 112px; zoom: .7;
+    margin: 0 auto -4px; flex: none; }
+
+  /* Shop page: let grid children shrink */
+  .hero > *, .section-head > *, .products > * { min-width: 0; }
+  .hero { grid-template-columns: minmax(0, 1fr); }
+}

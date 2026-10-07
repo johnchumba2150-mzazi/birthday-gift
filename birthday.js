@@ -48,6 +48,7 @@ function begin(){
   openingMusic.currentTime=0;
   openingMusic.volume=0.34;
   openingMusic.play().catch(()=>{});
+  laugh.muted=true; laugh.play().then(()=>{laugh.pause();laugh.currentTime=0;laugh.muted=false;}).catch(()=>{laugh.muted=false;});
   startButton.disabled=true;
   setTimeout(()=>showScreen('birthday-puzzle'),2500);
   renderPuzzle();
@@ -179,6 +180,7 @@ function renderDreamQuestion(){
   dreamQuestion.textContent=q.prompt;
   dreamHint.textContent=q.hint||'';
   dreamAnswer.innerHTML='';
+  dreamAnswer.classList.toggle('is-colors',q.type==='colors');
   dreamNext.disabled=true;
   dreamPrincess.classList.remove('ask');
   void dreamPrincess.offsetWidth;
@@ -207,19 +209,20 @@ function renderDreamQuestion(){
     input.addEventListener('input',()=>{saveDreamAnswer(input.value);dreamNext.disabled=!input.value.trim();});
     dreamAnswer.appendChild(input);
     if(input.value.trim())dreamNext.disabled=false;
-    setTimeout(()=>input.focus(),250);
+    if(!window.matchMedia('(pointer:coarse)').matches) setTimeout(()=>input.focus(),250);
   }
   setTimeout(()=>speakPrincess(q.prompt),350);
 }
 function startDreamBook(){
   dreamExperience.classList.add('active');
   dreamFinish.classList.remove('show');
+  dreamExperience.classList.remove('finished');
   dreamIndex=0;
   renderDreamQuestion();
 }
 dreamNext.addEventListener('click',()=>{
   if(dreamIndex<dreamQuestions.length-1){dreamIndex++;renderDreamQuestion();}
-  else {dreamFinish.classList.add('show');speakPrincess('Thank you, Imani. I wanted to know what you dream about.');}
+  else {dreamExperience.classList.add('finished');dreamFinish.classList.add('show');speakPrincess('Thank you, Imani. I wanted to know what you dream about.');}
 });
 function playFinalSong(){
   if(!akiSioni) return;
@@ -233,7 +236,7 @@ function playFinalSong(){
 }
 
 dreamDone.addEventListener('click',()=>{
-  dreamExperience.classList.remove('active');
+  dreamExperience.classList.remove('active','finished');
   dreamFinish.classList.remove('show');
   playFinalSong();
 });
