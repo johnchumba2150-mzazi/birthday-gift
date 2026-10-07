@@ -10,3 +10,13 @@ This is the first front-end prototype. Before public commerce use, connect the a
 
 Next deployment:
 GitHub -> Vercel -> public URL.
+
+
+FINAL SONG SETUP
+The updated birthday flow expects the final song at:
+assets/aki-sioni.mp3
+
+Place your legally obtained copy of "Aki Sioni" by Njerea at that exact path.
+The song starts when the user finishes the final Dream Book questions and clicks
+"Back to Imani Bead Works". It is intentionally not started during page load,
+because modern browsers block unrequested audio autoplay.

@@ -4,6 +4,7 @@ const startButton = document.querySelector('#start-birthday');
 const screens = [...document.querySelectorAll('.birthday-screen')];
 const laugh = document.querySelector('#laugh-audio');
 const song = document.querySelector('#birthday-song');
+const akiSioni = document.querySelector('#aki-sioni-song');
 const openingMusic = document.querySelector('#birthday-opening-music');
 const congratsBurst = document.querySelector('#congrats-burst');
 const puzzleData = [
@@ -220,7 +221,32 @@ dreamNext.addEventListener('click',()=>{
   if(dreamIndex<dreamQuestions.length-1){dreamIndex++;renderDreamQuestion();}
   else {dreamFinish.classList.add('show');speakPrincess('Thank you, Imani. I wanted to know what you dream about.');}
 });
+function playFinalSong(){
+  if(!akiSioni) return;
+  song.pause();
+  openingMusic.pause();
+  laugh.pause();
+  akiSioni.currentTime=0;
+  akiSioni.loop=true;
+  akiSioni.volume=0.9;
+  akiSioni.play().catch(()=>{});
+}
+
 dreamDone.addEventListener('click',()=>{
   dreamExperience.classList.remove('active');
   dreamFinish.classList.remove('show');
+  playFinalSong();
+});
+
+akiSioni.addEventListener('ended',()=>{
+  // Safety fallback: keep the final song looping if a browser ignores the loop attribute.
+  akiSioni.currentTime=0;
+  akiSioni.play().catch(()=>{});
+});
+
+window.addEventListener('beforeunload',()=>{
+  clearTimeout(prankTimer);
+  openingMusic.pause();
+  song.pause();
+  akiSioni.pause();
 });

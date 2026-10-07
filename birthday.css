@@ -38,3 +38,92 @@
 @keyframes congratsIn{0%{opacity:0;transform:scale(.45)}12%{opacity:1}38%{opacity:1;transform:scale(1.04)}75%{opacity:1}100%{opacity:0;transform:scale(1.1)}}
 @keyframes raySpin{0%{transform:scale(.2) rotate(-30deg);opacity:0}18%{opacity:1}100%{transform:scale(5.2) rotate(28deg);opacity:0}}
 @media(max-width:600px){.congrats-card{padding:25px 16px;border-radius:22px}.congrats-card span{font-size:clamp(27px,9vw,48px)}}
+
+
+/* Mobile-safe question layout */
+* { box-sizing: border-box; }
+img, video { max-width: 100%; height: auto; }
+
+.card {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 700px) {
+  .options {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Extra protection for Imani's final questions */
+.dream-card,
+.dream-question-wrap,
+.dream-answer {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.dream-question-wrap h2 {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.dream-answer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.dream-option {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.dream-input {
+  max-width: 100%;
+}
+
+@media (min-width: 700px) {
+  .dream-answer {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dream-input {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+}
+
+@media (max-width: 699px) {
+  .dream-card {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .dream-question-wrap h2 {
+    font-size: clamp(28px, 8.5vw, 42px);
+  }
+
+  .dream-answer {
+    gap: 9px;
+  }
+
+  .dream-option {
+    min-height: 48px;
+    padding: 12px 14px;
+  }
+}
